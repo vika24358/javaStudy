@@ -1,10 +1,10 @@
 package homework7;
 
 public class Animal {
-    String name;
-    int age;
-    String breed;
-    int price;
+    private String name;
+    private int age;
+    private String breed;
+    private int price;
 
     public Animal (String name, int age, String breed, int price) {
         this.name = name;

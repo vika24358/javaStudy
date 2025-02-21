@@ -1,8 +1,8 @@
 package homework7;
 
 public class Customer {
-    String name;
-    int money;
+    private String name;
+    private int money;
 
     public Customer(String name, int money) {
         this.name = name;
@@ -11,8 +11,8 @@ public class Customer {
 
     public boolean buyAnimal(ZooShop shop, String animalName){
         for (int i = 0; i<shop.currentAnimalNumber; i++) {
-            if (animalName.equals(shop.animals[i].name) && shop.animals[i].price <= money) {
-                this.money -= shop.animals[i].price;
+            if (animalName.equals(shop.animals[i].getName()) && shop.animals[i].getPrice() <= money) {
+                this.money -= shop.animals[i].getPrice();
                 shop.removeAnimal(animalName);
                 System.out.println("Purchase successful" );
                 return true;

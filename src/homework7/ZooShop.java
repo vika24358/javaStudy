@@ -19,7 +19,7 @@ public class ZooShop {
 
     public void removeAnimal(String name){
         for(int i = 0; i< currentAnimalNumber; i++){
-            if (animals[i].name.equals(name)) {
+            if (animals[i].getName().equals(name)) {
                 for (int j = i; j < currentAnimalNumber -1; j++) {
                     animals[j] = animals[j +1];
                 }
@@ -37,8 +37,8 @@ public class ZooShop {
 
     public String findAnimal (String name) {
         for (int i = 0; i < currentAnimalNumber; i++) {
-            if (animals[i].name.equals(name)) {
-                return animals[i].name;
+            if (animals[i].getName().equals(name)) {
+                return animals[i].getName();
             }
         }
     return null;

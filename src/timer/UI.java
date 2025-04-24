@@ -15,7 +15,7 @@ public class UI extends JFrame {
     private boolean running = false;
 
     public UI() {
-        setTitle("Таймер (Поток)");
+        setTitle("Timer");
         setSize(320, 180);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -25,9 +25,9 @@ public class UI extends JFrame {
         timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         add(timeLabel);
 
-        startButton = new JButton("Старт");
-        stopButton = new JButton("Стоп");
-        resetButton = new JButton("Сброс");
+        startButton = new JButton("Start");
+        stopButton = new JButton("Stop");
+        resetButton = new JButton("Reset");
 
         add(startButton);
         add(stopButton);

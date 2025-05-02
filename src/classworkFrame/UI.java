@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class UI extends JFrame implements ActionListener {
     private MyTextField display;
@@ -11,6 +15,7 @@ public class UI extends JFrame implements ActionListener {
     private JButton[] buttons;
     private int num1, num2, result;
     private String operator;
+    private ArrayList<String> historyList = new ArrayList<>();
 
     UI() {
         JFrame frame = new JFrame("Calculator");
@@ -43,7 +48,7 @@ public class UI extends JFrame implements ActionListener {
                 "5", "6", "1", "2",
                 "3", "0", "+", "-",
                 "*", "/", "=",
-                "C", "AC"
+                "C", "AC", "History"
         };
 
         buttons = new JButton[buttonLabels.length];
@@ -68,6 +73,22 @@ public class UI extends JFrame implements ActionListener {
                 operator = command;
                 display.setText("");
                 display.setNumber(num1+operator);
+                break;
+
+            case "History":
+                JFrame history = new JFrame("History");
+                history.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                history.setSize(300, 400);
+                JPanel historyPanel = new JPanel();
+                historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.Y_AXIS));
+                for (String h : historyList) {
+                    JLabel label = new JLabel(h);
+                    label.setAlignmentX(Component.LEFT_ALIGNMENT);
+                    historyPanel.add(label);
+                }
+                JScrollPane scrollPane = new JScrollPane(historyPanel);
+                history.add(scrollPane);
+                history.setVisible(true);
                 break;
 
             case "C":
@@ -107,6 +128,14 @@ public class UI extends JFrame implements ActionListener {
 
                 display.setText(String.valueOf(result));
                 display.setNumber("");
+                Path historyPath = Path.of("C:\\Users\\User\\IdeaProjects\\java\\src\\classworkFrame\\history.txt");
+                String content = String.format("%d %s %d = %d%n", num1, operator, num2, result);
+                historyList.add(content);
+                try {
+                    Files.writeString(historyPath, content, java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+                } catch (IOException ex) {
+                    System.out.println("Сталася помилка при записі файлу: " + ex.getMessage());
+                }
                 num1 = result;
                 break;
             default:
